@@ -1,0 +1,117 @@
+body {
+    background-image: url('../../assets/images/Signup Background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.page-title {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2em;
+    color: #ffffff;
+    padding: 10px 0; /* Optional: Add padding */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+.page-title::after {
+    content: '';
+    display: block;
+    width: 50%; /* Adjust width as needed */
+    height: 4px; /* Adjust height as needed */
+    margin: 10px auto 0; /* Adjust margin as needed */
+    background: linear-gradient(to right, blue, red); /* Gradient from blue to red */
+}
+
+.container {
+    position: relative;
+    background-color: rgba(30, 30, 30, 0.9); /* Slightly transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%; /* Adjust width as needed */
+    max-width: 600px; /* Adjust max-width as needed */
+    margin: 25px; /* Equal margins on all sides */
+    margin-top: 160px; /* Optional: Add margin-top */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.nav-link.active {
+    background-color: #d3d3d3;
+    color: #000;
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="password"] {
+    width: 100%;
+    max-width: 750pxpx; 
+    padding: 10px;
+    margin: 3%;
+    margin-left: -10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #6200ea;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #3700b3;
+}
+
+.success-message {
+    color: #4caf50;
+    text-align: center;
+}
+
+.error-message {
+    color: #f44336;
+    font-size: 10px;
+    margin-top: 0px;
+}
