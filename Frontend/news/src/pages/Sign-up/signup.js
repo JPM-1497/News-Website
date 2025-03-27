@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import axios from 'axios'; // Import axios for API calls
 import './signup.css'; // Create this CSS file for styling
 
 const SignUp = () => {
@@ -50,8 +51,8 @@ const SignUp = () => {
       newErrors.phoneNumber = 'Phone number is required';
       isValid = false;
     } else if (!/^\d+$/.test(formData.phoneNumber)) {
-        newErrors.phoneNumber = "Phone number must contain only numbers"
-        isValid = false;
+      newErrors.phoneNumber = 'Phone number must contain only numbers';
+      isValid = false;
     }
 
     if (!formData.dateOfBirth) {
@@ -73,25 +74,42 @@ const SignUp = () => {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Here you would typically make an API call to your backend
-      // to create the user account.
-      console.log('Form data:', formData); // For demonstration
-      // Example API call:
-      // api.post('/signup', formData)
-      //   .then(response => {
-      //     setSuccessMessage('Signup successful!');
-      //     setFormData({ firstName: '', lastName: '', email: '', phoneNumber: '', dateOfBirth: '', password: '', confirmPassword: '' });
-      //     setErrors({});
-      //   })
-      //   .catch(error => {
-      //     setErrors({ general: 'Signup failed. Please try again.' });
-      //   });
-      setSuccessMessage('Signup successful!');
-      setFormData({ firstName: '', lastName: '', email: '', phoneNumber: '', dateOfBirth: '', password: '', confirmPassword: '' });
-      setErrors({});
+      try {
+        // Make an API call to the UserCreateView endpoint
+        const response = await axios.post('http://localhost:8000/api/auth/signup/', {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone_number: formData.phoneNumber,
+          date_of_birth: formData.dateOfBirth,
+          password: formData.password,
+        });
+
+        // Handle success
+        setSuccessMessage('Signup successful!');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phoneNumber: '',
+          dateOfBirth: '',
+          password: '',
+          confirmPassword: '',
+        });
+        setErrors({});
+        console.log('Response:', response.data);
+      } catch (error) {
+        // Handle errors from the API
+        if (error.response && error.response.data) {
+          setErrors({ general: error.response.data.detail || 'Signup failed. Please try again.' });
+        } else {
+          setErrors({ general: 'An error occurred. Please try again later.' });
+        }
+        console.error('Error:', error);
+      }
     }
   };
 
